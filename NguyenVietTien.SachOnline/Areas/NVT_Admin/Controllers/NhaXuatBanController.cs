@@ -70,13 +70,10 @@ namespace NguyenVietTien.SachOnline.Areas.NVT_Admin.Controllers
         [HttpGet]
         public ActionResult XoaNXB(int id)
         {
-            Action XoaNXB = () =>
-            {
-                NHAXUATBAN nxb = GetNXB(id);
-                tien_db.NHAXUATBANs.Remove(nxb);
-                tien_db.SaveChanges();
-            };
-            XoaNXB?.Invoke();
+
+            NHAXUATBAN nxb = GetNXB(id);
+            tien_db.NHAXUATBANs.Remove(nxb);
+            tien_db.SaveChanges();
             return RedirectToAction("Index");
         }
 
