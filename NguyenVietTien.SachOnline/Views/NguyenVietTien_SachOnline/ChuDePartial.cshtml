@@ -1,0 +1,10 @@
+﻿<!-- CHỦ ĐỀ -->
+
+@model IEnumerable<NguyenVietTien.SachOnline.Models.CHUDE>
+<ul class="list-group">
+    <li class="list-group-item active" style="font-weight:bold; text-align:center;">SÁCH THEO CHỦ ĐỀ</li>
+    @foreach (var chuDe in Model)
+    {
+        <a href="#" class="list-group-item">@chuDe.TenChuDe</a>
+    }
+</ul>

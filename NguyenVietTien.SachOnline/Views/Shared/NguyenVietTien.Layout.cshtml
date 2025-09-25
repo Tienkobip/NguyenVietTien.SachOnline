@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nguyễn Việt Tiến - @ViewBag.Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/site.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .imgbook {
+            transition: all 1s ease-in;
+            width: 400px;
+        }
+
+        .imgbook:hover {
+            transform: scale(0.9);
+            cursor: pointer;
+        }
+
+        .imgsachbannhieu {
+            width: 100px;
+            transition: all 1s ease-in;
+        }
+
+        .imgsachbannhieu:hover {
+            transform: scale(0.9);
+            cursor: pointer;
+        }
+
+        .person-info {
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    @Html.Action("NavPartial", "NguyenVietTien_SachOnline")
+    @Html.Action("SliderPartial", "NguyenVietTien_SachOnline")
+
+    <!-- PHẦN THÂN TRANG -->
+    <div class="container">
+        <div class="row">
+            <!-- (3) Danh mục -->
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                @Html.Action("ChuDePartial", "NguyenVietTien_SachOnline")
+                @Html.Action("NhaXuatbanPartial", "NguyenVietTien_SachOnline")
+                <!-- Tương tự cho SÁCH THEO NHÀ XUẤT BẢN -->
+            </div>
+
+            <!-- (4) Sách mới -->
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    @RenderSection("SachBanNhieu", required: false)
+
+    @Html.Action("FooterPartial", "NguyenVietTien_SachOnline")
+</body>
+</html>

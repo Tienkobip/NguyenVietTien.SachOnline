@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "TRANG CHỦ";
+}
+
+@model IEnumerable<NguyenVietTien.SachOnline.Models.SACH>
+
+<h2 class="text-center">TRANG CHỦ - NGUYỄN VIỆT TIẾN - 2324802010369</h2>
+<h2 class="text-center">SÁCH MỚI</h2>
+<hr>
+<div class="row text-center">
+    @foreach (var sach in Model)
+    {
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+            <div class="thumbnail">
+                <img src="~/Images/@sach.AnhBia" alt="Thumbnail Image 1" class="img-responsive img-rounded imgbook">
+                <div class="caption">
+                    <h4 style="min-height:70px;">
+                        <a href="@Url.Action("BookDetail", "SachOnline", new { id = sach.MaSach })">@sach.TenSach</a>
+                    </h4>
+                    <p>Mô tả sản phẩm</p>
+                    <p>
+                        <a href="#" class="btn btn-primary" role="button">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Add to Cart
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- (5) Phân trang -->
+<nav class="text-center">
+    <ul class="pagination">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <li>
+                <a href="@Url.Action("Index", "NguyenVietTien_SachOnline", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        }
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            if (i == ViewBag.CurrentPage)
+            {
+                <li class="active"><a href="#">@i</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("Index", "NguyenVietTien_SachOnline", new { page = i })">@i</a></li>
+            }
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <li>
+                <a href="@Url.Action("Index", "NguyenVietTien_SachOnline", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+    </ul>
+</nav>
+
+@section SachBanNhieu 
+{
+    @Html.Action("SachBanNhieuPartial", "NguyenVietTien_SachOnline")
+}

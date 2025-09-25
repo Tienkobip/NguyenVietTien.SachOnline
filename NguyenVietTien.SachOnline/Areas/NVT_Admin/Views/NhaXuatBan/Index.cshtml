@@ -1,0 +1,58 @@
+﻿@model IEnumerable<NguyenVietTien.SachOnline.Models.NHAXUATBAN>
+
+@{
+    ViewBag.Title = "DANH SÁCH NHÀ XUẤT BẢN";
+    
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/site.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <h4 class="panel-title">DANH SÁCH NHÀ XUẤT BẢN</h4>
+            </div>
+            <div class="panel-body">
+                <p>
+                    @Html.ActionLink("Tạo mới", "ThemNXB", null, new { @class = "btn btn-success" })
+                </p>
+
+                <table class="table table-bordered table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th class="text-center">@Html.DisplayNameFor(model => model.MaNXB)</th>
+                            <th class="text-center">@Html.DisplayNameFor(model => model.TenNXB)</th>
+                            <th class="text-center">@Html.DisplayNameFor(model => model.DiaChi)</th>
+                            <th class="text-center">@Html.DisplayNameFor(model => model.DienThoai)</th>
+                            <th class="text-center">Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.MaNXB)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TenNXB)</td>
+                                <td>@Html.DisplayFor(modelItem => item.DiaChi)</td>
+                                <td>@Html.DisplayFor(modelItem => item.DienThoai)</td>
+                                <td>
+                                    @Html.ActionLink("✏️ Sửa", "SuaNXB", new { id = item.MaNXB }, new { @class = "btn btn-xs btn-warning" })
+                                    @Html.ActionLink("📄 Chi tiết", "ChiTietNXB", new { id = item.MaNXB }, new { @class = "btn btn-xs btn-info" })
+                                    @Html.ActionLink("🗑️ Xóa", "XoaNXB", new { id = item.MaNXB }, new { @class = "btn btn-xs btn-danger" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

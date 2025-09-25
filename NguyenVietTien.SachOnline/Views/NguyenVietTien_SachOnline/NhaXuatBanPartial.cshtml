@@ -1,0 +1,9 @@
+﻿<!-- NHÀ XUẤT BẢN -->
+@model IEnumerable<NguyenVietTien.SachOnline.Models.NHAXUATBAN>
+<ul class="list-group">
+    <li class="list-group-item active" style="font-weight:bold; text-align:center;">SÁCH THEO NHÀ XUẤT BẢN</li>
+    @foreach (var nhaXuatBan in Model)
+    {
+        <a href="#" class="list-group-item">@nhaXuatBan.TenNXB</a>
+    }
+</ul>
