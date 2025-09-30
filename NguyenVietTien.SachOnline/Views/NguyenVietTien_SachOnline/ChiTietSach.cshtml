@@ -1,0 +1,120 @@
+﻿@model NguyenVietTien.SachOnline.Models.SACH
+
+@{
+    ViewBag.Title = "Chi Tiết Sách - " + Model.TenSach;
+    Layout = "~/Views/Shared/NguyenVietTien.Layout.cshtml";
+}
+
+
+<style>
+    .book-price {
+        color: #d9534f;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .book-description {
+        color: #777;
+    }
+
+    .info-list {
+        list-style: none;
+        padding-left: 0;
+    }
+
+        .info-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+            .info-list li:last-child {
+                border-bottom: none;
+            }
+
+        .info-list .icon {
+            margin-right: 10px;
+            color: #337ab7;
+        }
+
+    .action-buttons {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Thông tin chi tiết sách</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                @{
+                    var imageUrl = !string.IsNullOrEmpty(Model.AnhBia) ? Url.Content("~/Images/" + Model.AnhBia) : "https://via.placeholder.com/400x500.png?text=Bìa+Sách";
+                }
+                <img src="@imageUrl" class="img-responsive thumbnail" alt="Bìa sách @Model.TenSach" style="width:100%;">
+            </div>
+
+            <div class="col-md-8">
+                <h1>@Model.TenSach</h1>
+
+                <div class="book-price">
+                    @if (Model.GiaBan.HasValue)
+                    {
+                        <span>@Model.GiaBan.Value.ToString("N0") VNĐ</span>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Chưa có giá</span>
+                    }
+                </div>
+
+                <h4>Mô tả</h4>
+                <p class="book-description">
+                    @if (!string.IsNullOrEmpty(Model.MoTa))
+                    {
+                        @Html.Raw(Model.MoTa) @* Dùng Html.Raw nếu mô tả có chứa thẻ HTML *@
+                    }
+                    else
+                    {
+                        <i>Chưa có mô tả cho sách này.</i>
+                    }
+                </p>
+
+                <hr>
+
+                <ul class="info-list">
+                    <li><i class="fa fa-barcode icon"></i> <strong>Mã sách:</strong> @Model.MaSach</li>
+                    <li>
+                        <i class="fa fa-calendar icon"></i> <strong>Ngày cập nhật:</strong>
+                        @(Model.NgayCapNhat.HasValue ? Model.NgayCapNhat.Value.ToString("dd/MM/yyyy") : "Chưa rõ")
+                    </li>
+                    <li>
+                        <i class="fa fa-line-chart icon"></i> <strong>Số lượng đã bán:</strong>
+                        @(Model.SoLuongBan.HasValue ? Model.SoLuongBan.Value.ToString() : "Chưa có")
+                    </li>
+                    <li>
+                        <i class="fa fa-tags icon"></i> <strong>Chủ đề:</strong>
+                        @* Giả sử có navigation property CHUDE *@
+                        <span>@(Model.CHUDE?.TenChuDe ?? "N/A")</span>
+                    </li>
+                    <li>
+                        <i class="fa fa-building icon"></i> <strong>Nhà xuất bản:</strong>
+                        @* Giả sử có navigation property NHAXUATBAN *@
+                        <span>@(Model.NHAXUATBAN?.TenNXB ?? "N/A")</span>
+                    </li>
+                </ul>
+
+                <div class="action-buttons">
+                    <a href="@Url.Action("ThemGioHang", "GioHang", new { ms = Model.MaSach, url = Request.Url.ToString() })" class="btn btn-primary btn-lg">
+                        <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                    </a>
+                    <a href="#" class="btn btn-default btn-lg">
+                        <i class="fa fa-heart"></i> Yêu thích
+                    </a>
+                    @Html.ActionLink("Quay về", "Index", "NguyenVietTien_SachOnline", null, new { @class = "btn btn-warning btn-lg" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

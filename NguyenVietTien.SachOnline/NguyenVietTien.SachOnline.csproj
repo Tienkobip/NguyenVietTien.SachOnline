@@ -315,6 +315,7 @@
     <Content Include="Views\NguyenVietTien_SachOnline\FooterPartial.cshtml" />
     <Content Include="Views\FileAndMail\SendMail.cshtml" />
     <Content Include="Views\NguyenVietTien_User\DangNhap.cshtml" />
+    <Content Include="Views\NguyenVietTien_SachOnline\ChiTietSach.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

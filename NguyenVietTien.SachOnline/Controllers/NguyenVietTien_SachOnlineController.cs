@@ -4,28 +4,29 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using NguyenVietTien.SachOnline.Models;
 
 namespace NguyenVietTien.SachOnline.Controllers
 {
     public class NguyenVietTien_SachOnlineController : Controller
     {
-        NguyenVietTien_SachOnlineEntities db_Tien_Long = new NguyenVietTien_SachOnlineEntities();
+        NguyenVietTien_SachOnlineEntities db_Tien = new NguyenVietTien_SachOnlineEntities();
 
         public List<SACH> LaySachMoi(int count)
         {
-            return db_Tien_Long.SACHes.OrderByDescending(a => a.NgayCapNhat).Take(count).ToList();
+            return db_Tien.SACHes.OrderByDescending(a => a.NgayCapNhat).Take(count).ToList();
         }
 
         public List<SACH> LaySachBanNhieu(int count)
         {
-            return db_Tien_Long.SACHes.OrderByDescending(a => a.SoLuongBan).Take(count).ToList();
+            return db_Tien.SACHes.OrderByDescending(a => a.SoLuongBan).Take(count).ToList();
         }
 
         // GET: SachOnline
         public ActionResult Index(int page = 1, int pageSize = 6)
         {
-            var allBooks = db_Tien_Long.SACHes.OrderByDescending(s => s.NgayCapNhat).ToList();
+            var allBooks = db_Tien.SACHes.OrderByDescending(s => s.NgayCapNhat).ToList();
 
             int totalItems = allBooks.Count();
             var pagedBooks = allBooks.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -50,13 +51,13 @@ namespace NguyenVietTien.SachOnline.Controllers
         [ChildActionOnly]
         public ActionResult ChuDePartial()
         {
-            return PartialView(db_Tien_Long.CHUDEs);
+            return PartialView(db_Tien.CHUDEs);
         }
 
         [ChildActionOnly]
         public ActionResult NhaXuatBanPartial()
         {
-            return PartialView(db_Tien_Long.NHAXUATBANs);
+            return PartialView(db_Tien.NHAXUATBANs);
         }
 
         [ChildActionOnly]
@@ -70,6 +71,12 @@ namespace NguyenVietTien.SachOnline.Controllers
         public ActionResult FooterPartial()
         {
             return PartialView();
+        }
+
+        [ChildActionOnly]
+        public ActionResult ChiTietSach(int id)
+        {
+            return View(db_Tien.SACHes.SingleOrDefault(sach => sach.MaSach == id));
         }
     }
 }
