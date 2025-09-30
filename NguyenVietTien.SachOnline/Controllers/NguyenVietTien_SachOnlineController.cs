@@ -73,7 +73,6 @@ namespace NguyenVietTien.SachOnline.Controllers
             return PartialView();
         }
 
-        [ChildActionOnly]
         public ActionResult ChiTietSach(int id)
         {
             return View(db_Tien.SACHes.SingleOrDefault(sach => sach.MaSach == id));

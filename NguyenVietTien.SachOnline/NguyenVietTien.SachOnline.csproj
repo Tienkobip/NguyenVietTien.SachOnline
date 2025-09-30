@@ -316,13 +316,13 @@
     <Content Include="Views\FileAndMail\SendMail.cshtml" />
     <Content Include="Views\NguyenVietTien_User\DangNhap.cshtml" />
     <Content Include="Views\NguyenVietTien_SachOnline\ChiTietSach.cshtml" />
+    <Content Include="Views\NguyenVietTien_User\DangKy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\NVT_Admin\Data\" />
     <Folder Include="Areas\NVT_Admin\Views\Shared\" />
     <Folder Include="UploadFile\" />
-    <Folder Include="Views\SachOnline\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

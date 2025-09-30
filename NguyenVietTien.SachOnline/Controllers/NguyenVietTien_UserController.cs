@@ -61,5 +61,33 @@ namespace NguyenVietTien.SachOnline.Controllers
             Session["TaiKhoan"] = null;
             return RedirectToAction("Index", "NguyenVietTien_SachOnline");
         }
+
+        [HttpGet]
+        public ActionResult DangKy()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult DangKyConfirmed()
+        {
+            if (ModelState.IsValid)
+            {
+                KHACHHANG khachHang = new KHACHHANG();
+                khachHang.HoTen = Request.Form["HoTen"];
+                string ngaySinh = Request.Form["NgaySinh"];
+                khachHang.NgaySinh = DateTime.ParseExact(ngaySinh, "yyyy-MM-dd", null);
+                khachHang.DienThoai = Request.Form["DienThoai"];
+                khachHang.Email = Request.Form["Email"];
+                khachHang.DiaChi = Request.Form["DiaChi"];
+                khachHang.TaiKhoan = Request.Form["TaiKhoan"];
+                khachHang.MatKhau = Request.Form["MatKhau"];
+                db_Tien.KHACHHANGs.Add(khachHang);
+                db_Tien.SaveChanges();
+                return RedirectToAction("DangNhap", "NguyenVietTien_User");
+            }
+            return View();
+        }
     }
 }

@@ -7,114 +7,193 @@
 
 
 <style>
-    .book-price {
-        color: #d9534f;
-        font-size: 28px;
+    .book-content {
+        flex: 1;
+        background: #f9f9f9; /* nền giống info-list */
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .book-content h1 {
+        font-size: 26px;
         font-weight: bold;
         margin-bottom: 15px;
+        text-align: center;
+        color: #333;
+    }
+
+    .book-price {
+        color: #d9534f;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .book-content h4 {
+        margin-top: 15px;
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #004085;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+        font-weight: bold;
     }
 
     .book-description {
-        color: #777;
+        color: #555;
+        line-height: 1.6;
+        text-align: justify;
+        font-size: 15px;
+    }
+
+    .book-detail-container {
+        background-color: #f0f8ff; /* chỉnh màu theo ý bạn */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .book-detail-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .book-detail-header h2 {
+        color: #004085;
+        text-transform: uppercase;
+    }
+
+    .book-info {
+        display: flex;
+        gap: 20px;
+    }
+
+    .book-info img {
+        max-width: 300px;
+        border-radius: 8px;
+    }
+
+    .action-buttons {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .action-buttons a {
+        margin: 5px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .btn-cart {
+        background: #007bff;
+        color: #fff;
+    }
+
+    .btn-favorite {
+        background: #6c757d;
+        color: #fff;
+    }
+
+    .btn-back {
+        background: #ffc107;
+        color: #000;
     }
 
     .info-list {
         list-style: none;
-        padding-left: 0;
+        padding: 0;
+        margin: 20px 0;
+        max-width: 300px; /* Giới hạn chiều rộng */
+        margin-left: auto; /* Đẩy sát sang bên phải */
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
-        .info-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
+    .info-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+        border-bottom: 1px solid #ddd;
+        font-size: 15px;
+    }
 
-            .info-list li:last-child {
-                border-bottom: none;
-            }
+    .info-list li:last-child {
+        border-bottom: none;
+    }
 
-        .info-list .icon {
-            margin-right: 10px;
-            color: #337ab7;
-        }
+    .info-list strong {
+        color: #333;
+    }
 
-    .action-buttons {
-        margin-top: 20px;
+    .info-list span {
+        color: #007bff;
+        font-weight: 500;
     }
 </style>
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Thông tin chi tiết sách</h3>
+
+<div class="book-detail-container">
+    <div class="book-detail-header">
+        <h2>Thông tin chi tiết sách</h2>
     </div>
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-md-4">
-                @{
-                    var imageUrl = !string.IsNullOrEmpty(Model.AnhBia) ? Url.Content("~/Images/" + Model.AnhBia) : "https://via.placeholder.com/400x500.png?text=Bìa+Sách";
-                }
-                <img src="@imageUrl" class="img-responsive thumbnail" alt="Bìa sách @Model.TenSach" style="width:100%;">
-            </div>
 
-            <div class="col-md-8">
-                <h1>@Model.TenSach</h1>
-
-                <div class="book-price">
-                    @if (Model.GiaBan.HasValue)
-                    {
-                        <span>@Model.GiaBan.Value.ToString("N0") VNĐ</span>
-                    }
-                    else
-                    {
-                        <span class="text-muted">Chưa có giá</span>
-                    }
-                </div>
-
-                <h4>Mô tả</h4>
-                <p class="book-description">
-                    @if (!string.IsNullOrEmpty(Model.MoTa))
-                    {
-                        @Html.Raw(Model.MoTa) @* Dùng Html.Raw nếu mô tả có chứa thẻ HTML *@
-                    }
-                    else
-                    {
-                        <i>Chưa có mô tả cho sách này.</i>
-                    }
-                </p>
-
-                <hr>
-
-                <ul class="info-list">
-                    <li><i class="fa fa-barcode icon"></i> <strong>Mã sách:</strong> @Model.MaSach</li>
-                    <li>
-                        <i class="fa fa-calendar icon"></i> <strong>Ngày cập nhật:</strong>
-                        @(Model.NgayCapNhat.HasValue ? Model.NgayCapNhat.Value.ToString("dd/MM/yyyy") : "Chưa rõ")
-                    </li>
-                    <li>
-                        <i class="fa fa-line-chart icon"></i> <strong>Số lượng đã bán:</strong>
-                        @(Model.SoLuongBan.HasValue ? Model.SoLuongBan.Value.ToString() : "Chưa có")
-                    </li>
-                    <li>
-                        <i class="fa fa-tags icon"></i> <strong>Chủ đề:</strong>
-                        @* Giả sử có navigation property CHUDE *@
-                        <span>@(Model.CHUDE?.TenChuDe ?? "N/A")</span>
-                    </li>
-                    <li>
-                        <i class="fa fa-building icon"></i> <strong>Nhà xuất bản:</strong>
-                        @* Giả sử có navigation property NHAXUATBAN *@
-                        <span>@(Model.NHAXUATBAN?.TenNXB ?? "N/A")</span>
-                    </li>
-                </ul>
-
-                <div class="action-buttons">
-                    <a href="@Url.Action("ThemGioHang", "GioHang", new { ms = Model.MaSach, url = Request.Url.ToString() })" class="btn btn-primary btn-lg">
-                        <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                    </a>
-                    <a href="#" class="btn btn-default btn-lg">
-                        <i class="fa fa-heart"></i> Yêu thích
-                    </a>
-                    @Html.ActionLink("Quay về", "Index", "NguyenVietTien_SachOnline", null, new { @class = "btn btn-warning btn-lg" })
-                </div>
-            </div>
+    <div class="book-info">
+        <div>
+            @{
+                var imageUrl = !string.IsNullOrEmpty(Model.AnhBia) ?
+                    Url.Content("~/Images/" + Model.AnhBia) :
+                    "https://via.placeholder.com/300x400.png?text=Bìa+Sách";
+            }
+            <img src="@imageUrl" alt="Bìa sách @Model.TenSach">
         </div>
+
+        <div class="book-content">
+            <h1>@Model.TenSach</h1>
+
+            <div class="book-price">
+                @if (Model.GiaBan.HasValue)
+                {
+                    <span>@Model.GiaBan.Value.ToString("N0") VNĐ</span>
+                }
+                else
+                {
+                    <span class="text-muted">Chưa có giá</span>
+                }
+            </div>
+
+            <h4>Mô tả</h4>
+            <p class="book-description">
+                @if (!string.IsNullOrEmpty(Model.MoTa))
+                {
+                    @Html.Raw(Model.MoTa)
+                }
+                else
+                {
+                    <i>Chưa có mô tả cho sách này.</i>
+                }
+            </p>
+
+            <ul class="info-list">
+                <li><strong>Mã sách:</strong> @Model.MaSach</li>
+                <li><strong>Ngày cập nhật:</strong> @(Model.NgayCapNhat?.ToString("dd/MM/yyyy") ?? "Chưa rõ")</li>
+                <li><strong>Số lượng đã bán:</strong> @(Model.SoLuongBan?.ToString() ?? "Chưa có")</li>
+                <li><strong>Chủ đề:</strong> @(Model.CHUDE?.TenChuDe ?? "N/A")</li>
+                <li><strong>Nhà xuất bản:</strong> @(Model.NHAXUATBAN?.TenNXB ?? "N/A")</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="@Url.Action("ThemGioHang", "GioHang", new { ms = Model.MaSach, url = Request.Url.ToString() })" class="btn-cart">
+            🛒 Thêm vào giỏ hàng
+        </a>
+        <a href="#" class="btn-favorite">❤️ Yêu thích</a>
+        @Html.ActionLink("⬅ Quay về", "Index", "NguyenVietTien_SachOnline", null, new { @class = "btn-back" })
     </div>
 </div>

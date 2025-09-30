@@ -3,79 +3,122 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>DangNhap</title>
     <style type="text/css">
-        td{
-            height: 40px;
+        body {
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            background: #f5f6fa;
+        }
+
+        .login-container {
+            width: 360px;
+            margin: 40px auto;
+            padding: 25px 30px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #f8faff;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .login-container .remember-me {
+            font-size: 13px;
+            color: #555;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .login-container input[type="submit"]:hover {
+            background: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <h4 style="color:red; text-align:center;">@ViewBag.ThongBao</h4>
-    <h2 style="text-align:center;">ĐĂNG NHẬP</h2>
-    <table align="center">
+    <div class="login-container">
+        <h2>ĐĂNG NHẬP</h2>
+        <h4 style="color:red; text-align:center;">@ViewBag.ThongBao</h4>
         @using (Html.BeginForm())
         {
             @Html.ValidationSummary(true)
-            if (Request.Cookies["TenDN"] != null && Request.Cookies["TenDN"] != null)
+
+            if (Request.Cookies["TenDN"] != null && Request.Cookies["MatKhau"] != null)
             {
-                <tr>
-                    <td>Tên đăng nhập:</td>
-                    <td>
-                        <input type="text" name="TenDN" value="@Request.Cookies["TenDN"].Value" />
-                        @ViewData["Err1"]
-                    </td>
-                </tr>
-                <tr>
-                    <td>Mật khẩu:</td>
-                    <td>
-                        <input type="password" name="MatKhau" value="@Request.Cookies["MatKhau"].Value" />
-                        @ViewBag.Err2
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        @Html.CheckBox("remember", isChecked: true)
-                        <span style="font-style:italic">Nhớ thông tin đăng nhập</span>
-                    </td>
-                </tr>
+                <input type="text" name="TenDN" value="@Request.Cookies["TenDN"].Value" placeholder="Tên đăng nhập" />
+                <div class="error">@ViewData["Err1"]</div>
+
+                <input type="password" name="MatKhau" value="@Request.Cookies["MatKhau"].Value" placeholder="Mật khẩu" />
+                <div class="error">@ViewBag.Err2</div>
+
+                <div class="remember-me">
+                    @Html.CheckBox("remember", isChecked: true)
+                    <span style="margin-left: 6px;">Nhớ thông tin đăng nhập</span>
+                </div>
             }
             else
             {
-                <tr>
-                    <td>Tên đăng nhập:</td>
-                    <td>
-                        <input type="text" name="TenDN" />
-                        @ViewData["Err1"]
-                    </td>
-                </tr>
-                <tr>
-                    <td>Mật khẩu:</td>
-                    <td>
-                        <input type="password" name="MatKhau" />
-                        @ViewBag.Err2
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        @Html.CheckBox("remember", isChecked: false)
-                        <span style="font-style:italic">Nhớ thông tin đăng nhập</span>
-                    </td>
-                </tr>
+                <input type="text" name="TenDN" placeholder="Tên đăng nhập" />
+                <div class="error">@ViewData["Err1"]</div>
+
+                <input type="password" name="MatKhau" placeholder="Mật khẩu" />
+                <div class="error">@ViewBag.Err2</div>
+
+                <div class="remember-me">
+                    @Html.CheckBox("remember", isChecked: false)
+                    <span style="margin-left: 6px;">Nhớ thông tin đăng nhập</span>
+                </div>
             }
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" name="Đăng nhập" />
-                </td>
-            </tr>
+
+            <input type="submit" value="Đăng nhập" />
         }
-    </table>
+    </div>
 </body>
 </html>

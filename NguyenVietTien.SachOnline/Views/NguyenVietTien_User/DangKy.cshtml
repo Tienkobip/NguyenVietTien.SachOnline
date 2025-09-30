@@ -1,0 +1,230 @@
+﻿@model NguyenVietTien.SachOnline.Models.KHACHHANG
+
+@{
+    ViewBag.Title = "DangKy";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ĐĂNG KÝ TÀI KHOẢN</title>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .registration-card {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .card-header-custom {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .card-header-custom h2 {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .card-header-custom p {
+            color: rgba(255,255,255,0.85);
+            font-size: 14px;
+        }
+
+        .form-section {
+            padding: 30px;
+        }
+
+        .form-label-custom {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .form-label-custom i {
+            margin-right: 6px;
+            color: #667eea;
+        }
+
+        .input-group-custom {
+            margin-bottom: 18px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            font-size: 15px;
+            background: #f8f9fa;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            background: #fff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .text-danger.small {
+            color: #d32f2f;
+            font-size: 13px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102,126,234,0.4);
+        }
+
+        .card-footer-custom {
+            background: #f9f9f9;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #555;
+            border-top: 1px solid #ddd;
+        }
+
+        .card-footer-custom a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn-back {
+            margin-top: 15px;
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102,126,234,0.4);
+        }
+
+        @@keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-card">
+        <div class="card-header-custom">
+            <h2><i class="fas fa-user-plus"></i> Đăng Ký Tài Khoản</h2>
+            <p>Tạo tài khoản mới để bắt đầu mua sắm</p>
+        </div>
+
+        <div class="form-section">
+            @using (Html.BeginForm("DangKyConfirmed", "NguyenVietTien_User", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                <div class="input-group-custom">
+                    <label class="form-label-custom"><i class="fas fa-user"></i> Họ và Tên</label>
+                    @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control", placeholder = "Nguyễn Văn A" } })
+                    @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="input-group-custom">
+                    <label class="form-label-custom"><i class="fas fa-calendar-alt"></i> Ngày Sinh</label>
+                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="input-group-custom">
+                    <label class="form-label-custom"><i class="fas fa-phone-alt"></i> Số Điện Thoại</label>
+                    @Html.EditorFor(model => model.DienThoai, new { htmlAttributes = new { @class = "form-control", placeholder = "0123456789" } })
+                    @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="input-group-custom">
+                    <label class="form-label-custom"><i class="fas fa-envelope"></i> Email</label>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type = "email", placeholder = "example@email.com" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="input-group-custom">
+                    <label class="form-label-custom"><i class="fas fa-map-marker-alt"></i> Địa Chỉ</label>
+                    @Html.TextAreaFor(model => model.DiaChi, new { @class = "form-control", rows = "3", placeholder = "Số nhà, đường, quận/huyện, tỉnh/thành phố" })
+                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="input-group-custom">
+                    <label class="form-label-custom"><i class="fas fa-user-circle"></i> Tên Đăng Nhập</label>
+                    @Html.EditorFor(model => model.TaiKhoan, new { htmlAttributes = new { @class = "form-control", placeholder = "Chọn tên tài khoản" } })
+                    @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="input-group-custom">
+                    <label class="form-label-custom"><i class="fas fa-lock"></i> Mật Khẩu</label>
+                    @Html.PasswordFor(model => model.MatKhau, new { @class = "form-control", placeholder = "Nhập mật khẩu bảo mật" })
+                    @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger small" })
+                </div>
+
+                @Html.HiddenFor(model => model.MaKH)
+
+                <button type="submit" class="btn-register"><i class="fas fa-check-circle"></i> Đăng Ký Ngay</button>
+            }
+        </div>
+
+        <div class="card-footer-custom">
+            <p>Đã có tài khoản? @Html.ActionLink("Đăng nhập tại đây", "DangNhap")</p>
+            <a href="@Url.Action("Index", "NguyenVietTien_SachOnline")" class="btn-back" style="color:#fff;"><i class="fas fa-home"></i> Quay lại Trang chủ</a>
+        </div>
+    </div>
+</body>
+</html>
