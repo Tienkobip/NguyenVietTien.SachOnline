@@ -70,7 +70,6 @@ namespace NguyenVietTien.SachOnline.Areas.NVT_Admin.Controllers
         [HttpGet]
         public ActionResult XoaNXB(int id)
         {
-
             NHAXUATBAN nxb = GetNXB(id);
             tien_db.NHAXUATBANs.Remove(nxb);
             tien_db.SaveChanges();

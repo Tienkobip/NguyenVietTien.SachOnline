@@ -35,29 +35,38 @@ namespace NguyenVietTien.SachOnline.Controllers
             return View(pagedBooks);
         }
 
-
+        [ChildActionOnly]
         public ActionResult NavPartial()
         {
             return PartialView();
         }
 
+        [ChildActionOnly]
         public ActionResult SliderPartial()
         {
             return PartialView();
         }
+
+        [ChildActionOnly]
         public ActionResult ChuDePartial()
         {
             return PartialView(db_Tien_Long.CHUDEs);
         }
+
+        [ChildActionOnly]
         public ActionResult NhaXuatBanPartial()
         {
             return PartialView(db_Tien_Long.NHAXUATBANs);
         }
+
+        [ChildActionOnly]
         public ActionResult SachBanNhieuPartial()
         {
             var listSachBanNhieu = LaySachBanNhieu(6);
             return PartialView(listSachBanNhieu);
         }
+
+        [ChildActionOnly]
         public ActionResult FooterPartial()
         {
             return PartialView();

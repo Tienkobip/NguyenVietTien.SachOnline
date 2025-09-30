@@ -135,6 +135,7 @@
     <Compile Include="Controllers\FileAndMailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NguyenVietTien_SachOnlineController.cs" />
+    <Compile Include="Controllers\NguyenVietTien_UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -313,6 +314,7 @@
     <Content Include="Views\NguyenVietTien_SachOnline\SachBanNhieuPartial.cshtml" />
     <Content Include="Views\NguyenVietTien_SachOnline\FooterPartial.cshtml" />
     <Content Include="Views\FileAndMail\SendMail.cshtml" />
+    <Content Include="Views\NguyenVietTien_User\DangNhap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
