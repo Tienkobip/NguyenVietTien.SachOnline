@@ -11,7 +11,8 @@ namespace NguyenVietTien.SachOnline.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SACH
     {
         public SACH()
@@ -19,7 +20,7 @@ namespace NguyenVietTien.SachOnline.Models
             this.CHITIETDATHANGs = new HashSet<CHITIETDATHANG>();
             this.VIETSACHes = new HashSet<VIETSACH>();
         }
-    
+
         public int MaSach { get; set; }
         public string TenSach { get; set; }
         public string MoTa { get; set; }
