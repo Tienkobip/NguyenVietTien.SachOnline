@@ -21,7 +21,9 @@
              ">
 
             <div class="thumbnail">
-                <img src="~/Images/@sach.AnhBia" alt="Thumbnail Image 1" class="img-responsive img-rounded imgbook">
+                <a href="@Url.Action("ChiTietSach", "NguyenVietTien_SachOnline", new { id = sach.MaSach })">
+                    <img src="~/Images/@sach.AnhBia" alt="@sach.TenSach" class="img-responsive img-rounded imgbook">
+                </a>
                 <div class="caption">
                     <h4 style="min-height:70px;">
                         <a href="@Url.Action("ChiTietSach", "NguyenVietTien_SachOnline", new { id = sach.MaSach })">@sach.TenSach</a>

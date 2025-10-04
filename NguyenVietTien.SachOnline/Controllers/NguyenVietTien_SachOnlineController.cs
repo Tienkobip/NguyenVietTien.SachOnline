@@ -77,5 +77,15 @@ namespace NguyenVietTien.SachOnline.Controllers
         {
             return View(db_Tien.SACHes.SingleOrDefault(sach => sach.MaSach == id));
         }
+
+        public ActionResult SachTheoChuDe(int id)
+        {
+            return View(db_Tien.SACHes.Where(sach => sach.MaCD == id).ToList());
+        }
+
+        public ActionResult SachTheoNhaXuatBan(int id)
+        {
+            return View(db_Tien.SACHes.Where(sach => sach.MaNXB == id).ToList());
+        }
     }
 }

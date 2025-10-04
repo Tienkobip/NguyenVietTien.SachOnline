@@ -4,6 +4,6 @@
     <li class="list-group-item active" style="font-weight:bold; text-align:center;">SÁCH THEO NHÀ XUẤT BẢN</li>
     @foreach (var nhaXuatBan in Model)
     {
-        <a href="#" class="list-group-item">@nhaXuatBan.TenNXB</a>
+        <a href="@Url.Action("SachTheoNhaXuatBan", "NguyenVietTien_SachOnline", new { id = nhaXuatBan.MaNXB })" class="list-group-item">@nhaXuatBan.TenNXB</a>
     }
 </ul>
